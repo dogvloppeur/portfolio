@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dogvloppeur — Portfolio</title>
-  <meta name="description" content="Portfolio de dogvloppeur — IA & applications." />
+  <meta name="description" content="dogvloppeur Portfolio — AI & applications." />
   <style>
     :root{ --bg:#000; --panel:#0a0a0a; --text:#fff; --muted:#bdbdbd; --card:#111; --radius:12px; --maxw:1100px; --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; }
     *{box-sizing:border-box}
@@ -12,7 +12,6 @@
     body{margin:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
     a{color:inherit}
 
-    /* Splash */
     .splash{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:1000}
     .splash.hidden{opacity:0;pointer-events:none;transform:translateY(-6%);transition:opacity .45s ease,transform .45s ease}
     .typewrap{display:flex;flex-direction:column;align-items:center;gap:18px}
@@ -22,8 +21,7 @@
     .enter-btn{padding:14px 22px;border-radius:10px;background:transparent;color:var(--text);cursor:pointer;font-weight:700;font-size:16px}
     .enter-btn:hover{opacity:0.85}
 
-    /* Main */
-    .container{max-width:var(--maxw);margin:36px auto;padding:20px}
+    .container{max-width:var(--maxw);margin:36px auto;padding:20px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
     header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
     .brand{font-weight:800;font-size:18px}
     .nav{display:flex;gap:12px}
@@ -33,7 +31,6 @@
     .hero h1{font-size:32px;margin:0}
     .hero p{color:var(--muted);margin-top:8px}
 
-    /* Projects */
     .projects{margin-top:26px}
     .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .project-card{background:var(--panel);border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.03)}
@@ -50,185 +47,127 @@
     .about, .contact, .categories-section{margin-top:28px;padding:16px;border-radius:10px;background:transparent}
     .muted{color:var(--muted)}
 
-    /* modal */
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:1000;padding:20px}
     .modal.open{display:flex}
     .modal-card{width:100%;max-width:700px;background:#0b0b0b;padding:18px;border-radius:10px}
     .modal-card h3{margin:0 0 8px}
     .modal-card p{color:var(--muted)}
-
-    /* focus style for categories section when scrolled to */
     .focus-outline{outline:2px solid rgba(255,255,255,0.06);padding:14px;border-radius:8px}
-
   </style>
 </head>
 <body>
 
-  <!-- Splash: unchanged (no categories) -->
   <div class="splash" id="splash">
     <div class="typewrap">
       <div style="display:flex;align-items:center;gap:8px"><div class="typed" id="typed"> </div><div class="angle">&lt;&gt;</div></div>
       <div class="enter-row">
-        <button class="enter-btn" id="enter">[ Entrer ]</button>
+        <button class="enter-btn" id="enter">[ Enter ]</button>
       </div>
     </div>
   </div>
 
-  <div class="container" id="app" style="opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease">
+  <div class="container" id="app">
     <header class="top">
       <div class="brand">dogvloppeur&lt;&gt;</div>
       <nav class="nav">
-        <a href="#projects">Projets</a>
-        <a href="#categories">Catégories</a>
-        <a href="#about">À propos</a>
+        <a href="#projects">Projects</a>
+        <a href="#categories">Categories</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <section class="hero">
-      <h1>Je conçois des agents intelligents, des sites web et des applications</h1>
-      <p class="muted">Recherche et développement d'agents pour jeux, systèmes de simulation et applications cross‑platform.</p>
+      <h1>I build intelligent agents, websites & applications</h1>
+      <p class="muted">Research & development of AI agents for games, simulations and cross-platform applications.</p>
     </section>
 
     <section class="projects" id="projects">
-      <h2>Projets</h2>
+      <h2>Projects</h2>
       <div class="projects-grid" id="projects-grid"></div>
     </section>
 
     <section class="categories-section" id="categories">
-      <h2>Catégories</h2>
-      <p class="muted">Sur cette page : présentation simple des catégories. Les éléments détaillés seront ajoutés progressivement.</p>
+      <h2>Categories</h2>
+      <p class="muted">Simple presentation of categories. Detailed elements will be added gradually.</p>
       <ul style="margin-top:12px">
-        <li><strong>IA</strong> — Agents, simulations et modèles d'apprentissage.</li>
-        <li><strong>Apps</strong> — Applications mobiles & desktop (Flutter).</li>
-        <li><strong>Tools</strong> — Outils & scripts — <em style="color:var(--muted)">Coming soon</em></li>
+        <li><strong>AI</strong> — Agents, simulations, and learning models.</li>
+        <li><strong>Apps</strong> — Mobile & desktop applications (Flutter).</li>
+        <li><strong>Tools</strong> — Scripts & automation — <em style="color:var(--muted)">Coming soon</em></li>
       </ul>
     </section>
 
     <section class="about" id="about">
-      <h2>À propos</h2>
-      <p class="muted">dogvloppeur — développeur spécialisé en IA et applications. Je construis des pipelines de simulation, agents et interfaces pour transformer des prototypes en produits.</p>
+      <h2>About</h2>
+      <p class="muted">dogvloppeur — developer specialized in AI & applications. I build simulations, agents and interfaces to turn prototypes into products.</p>
     </section>
 
     <section class="contact" id="contact">
       <h2>Contact</h2>
       <p class="muted">Code & repos: <a href="https://github.com/dogvloppeur" target="_blank">github.com/dogvloppeur</a></p>
-      <p class="muted">Discord:je préfère les échanges par Discord.</p>
+      <p class="muted">Prefer exchanges via Discord.</p>
     </section>
 
   </div>
 
   <div class="modal" id="modal">
     <div class="modal-card">
-      <h3 id="modal-title">Titre</h3>
+      <h3 id="modal-title">Title</h3>
       <p id="modal-desc"></p>
-      <div style="margin-top:12px;display:flex;gap:8px"><button class="btn-primary" id="modal-close">Fermer</button></div>
+      <div style="margin-top:12px;display:flex;gap:8px"><button class="btn-primary" id="modal-close">Close</button></div>
     </div>
   </div>
 
   <script>
-    // ---- Robust initialization: wait DOM, log errors, ensure handlers attached ----
     document.addEventListener('DOMContentLoaded', () => {
-      try {
-        const text = 'dogvloppeur';
-        const el = document.getElementById('typed');
-        let p = 0;
-        (function type(){
-          if (!el) return;
-          if (p <= text.length) {
-            el.textContent = text.slice(0, p);
-            p++;
-            setTimeout(type, 80);
-          }
-        })();
+      const text = 'dogvloppeur';
+      const el = document.getElementById('typed');
+      let p = 0;
+      (function type(){ if (!el) return; if (p <= text.length) { el.textContent = text.slice(0,p); p++; setTimeout(type,80); } })();
 
-        const splash = document.getElementById('splash');
-        const app = document.getElementById('app');
-        const enter = document.getElementById('enter');
+      const splash = document.getElementById('splash');
+      const app = document.getElementById('app');
+      const enter = document.getElementById('enter');
 
-        if (!enter) {
-          console.error('Bouton Entrer introuvable (id="enter")');
-          return;
-        }
-
-        function revealAndScrollToCategories() {
-          console.log('Entrée cliquée — reveal app');
-          // add hidden class for transition
-          splash.classList.add('hidden');
-          // ensure splash is removed from tab order and clicks after transition
-          setTimeout(() => {
-            try { splash.style.display = 'none'; } catch (e) {}
-            app.style.opacity = '1';
-            app.style.transform = 'translateY(0)';
-            // scroll to categories and highlight briefly
-            const cat = document.getElementById('categories');
-            if (cat) {
-              cat.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              cat.classList.add('focus-outline');
-              setTimeout(() => cat.classList.remove('focus-outline'), 1600);
-            }
-          }, 420);
-        }
-
-        enter.addEventListener('click', (ev) => {
-          ev.preventDefault();
-          revealAndScrollToCategories();
-        });
-
-        // also respond to Enter key when splash is visible
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            // ignore if splash already hidden
-            if (splash && !splash.classList.contains('hidden')) {
-              revealAndScrollToCategories();
-            }
-          }
-        });
-
-        // render projects on load (but keep splash covering until user enters)
-        renderProjects();
-
-        // modal close
-        const modalClose = document.getElementById('modal-close');
-        if (modalClose) modalClose.addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
-
-        console.log('Init complete — handlers attached');
-      } catch (err) {
-        console.error('Init error', err);
-        alert('Erreur initialisation site — regarde la console (F12) pour plus de détails');
+      function revealAndScrollToCategories() {
+        splash.classList.add('hidden');
+        setTimeout(()=>{
+          try{ splash.style.display='none'; }catch(e){}
+          app.style.opacity='1'; app.style.transform='translateY(0)';
+          const cat = document.getElementById('categories');
+          if(cat){ cat.scrollIntoView({behavior:'smooth',block:'start'}); cat.classList.add('focus-outline'); setTimeout(()=>cat.classList.remove('focus-outline'),1600); }
+        },420);
       }
+
+      enter.addEventListener('click',(ev)=>{ev.preventDefault(); revealAndScrollToCategories();});
+      document.addEventListener('keydown',(e)=>{if(e.key==='Enter'){if(splash&&!splash.classList.contains('hidden')){revealAndScrollToCategories();}}});
+
+      renderProjects();
+      const modalClose=document.getElementById('modal-close');
+      if(modalClose) modalClose.addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
     });
 
-    // projects data and render function (extracted so renderProjects can be called before enter)
-    const projects = [
-      {id:'clash', title:'IA Clash Royale', desc:'Agent d’apprentissage par renforcement et heuristiques pour Clash Royale. Simulation, entraînement, évaluation.', tags:['AI','RL'], repo:'https://github.com/dogvloppeur'},
-      {id:'cash', title:'CashCrypto', desc:'Application Flutter pour suivre un portefeuille crypto & actions, graphiques et trading fictif.', tags:['Flutter','Mobile'], repo:'https://github.com/dogvloppeur'},
-      {id:'toolkit', title:'Outils & Scripts', desc:'Collection d’outils d’automatisation et scripts utilitaires (en développement).', tags:['Tools'], repo:'https://github.com/dogvloppeur'},
-      {id:'website', title:'Site Web Personnel', desc:'Mes site web personnel pour présenter des projets comme StanixOS ou BenOS.', tags:['Web'], repo:'https://github.com/dogvloppeur'}
+    const projects=[
+      {id:'clash',title:'Clash Royale AI',desc:'Reinforcement learning agent for Clash Royale. Simulation, training, evaluation.',tags:['AI','RL'],repo:'https://github.com/dogvloppeur'},
+      {id:'cash',title:'CashCrypto',desc:'Flutter app to track crypto & stocks portfolio, charts and mock trading.',tags:['Flutter','Mobile'],repo:'https://github.com/dogvloppeur'},
+      {id:'toolkit',title:'Tools & Scripts',desc:'Collection of automation tools and utility scripts (in development).',tags:['Tools'],repo:'https://github.com/dogvloppeur'},
+      {id:'website',title:'Personal Website',desc:'Personal websites to showcase projects like StanixOS or BenOS.',tags:['Web'],repo:'https://github.com/dogvloppeur'}
     ];
 
     function renderProjects(){
-      const grid = document.getElementById('projects-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      projects.forEach(pj => {
-        const card = document.createElement('article'); card.className='project-card';
-        card.innerHTML = `
-          <h3 class="project-title">${pj.title}</h3>
-          <p class="project-desc">${pj.desc}</p>
-          <div class="project-meta">${pj.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div>
-          <div class="actions"><button class="btn-ghost" data-id="${pj.id}">En savoir plus</button><button class="btn-primary" data-repo="${pj.repo}">Voir le repo</button></div>
-        `;
+      const grid=document.getElementById('projects-grid');
+      if(!grid) return;
+      grid.innerHTML='';
+      projects.forEach(pj=>{
+        const card=document.createElement('article'); card.className='project-card';
+        card.innerHTML=`<h3 class="project-title">${pj.title}</h3><p class="project-desc">${pj.desc}</p><div class="project-meta">${pj.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div><div class="actions"><button class="btn-ghost" data-id="${pj.id}">Learn more</button><button class="btn-primary" data-repo="${pj.repo}">View repo</button></div>`;
         grid.appendChild(card);
       });
-      // attach listeners
-      document.querySelectorAll('.project-card .btn-ghost').forEach(b=>b.addEventListener('click', ()=>{ const id=b.dataset.id; const pj = projects.find(x=>x.id===id); if(!pj) return; openModal(pj.title,pj.desc); }));
-      document.querySelectorAll('.project-card .btn-primary').forEach(b=>b.addEventListener('click', ()=>{ window.open(b.dataset.repo,'_blank'); }));
+      document.querySelectorAll('.project-card .btn-ghost').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.id; const pj=projects.find(x=>x.id===id); if(!pj) return; openModal(pj.title,pj.desc);}));
+      document.querySelectorAll('.project-card .btn-primary').forEach(b=>b.addEventListener('click',()=>{window.open(b.dataset.repo,'_blank');}));
     }
 
-    // modal
     function openModal(t,d){ document.getElementById('modal-title').textContent=t; document.getElementById('modal-desc').textContent=d; document.getElementById('modal').classList.add('open'); }
-
   </script>
 </body>
 </html>
