@@ -1,173 +1,238 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>dogvloppeur — Portfolio</title>
-  <meta name="description" content="dogvloppeur Portfolio — AI & applications." />
-  <style>
-    :root{ --bg:#000; --panel:#0a0a0a; --text:#fff; --muted:#bdbdbd; --card:#111; --radius:12px; --maxw:1100px; --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
-    a{color:inherit}
-
-    .splash{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:1000}
-    .splash.hidden{opacity:0;pointer-events:none;transform:translateY(-6%);transition:opacity .45s ease,transform .45s ease}
-    .typewrap{display:flex;flex-direction:column;align-items:center;gap:18px}
-    .typed{font-family:var(--mono);font-weight:800;font-size:44px;letter-spacing:1px;color:var(--text)}
-    .angle{color:var(--muted);margin-left:6px}
-    .enter-row{display:flex;gap:12px}
-    .enter-btn{padding:14px 22px;border-radius:10px;background:transparent;color:var(--text);cursor:pointer;font-weight:700;font-size:16px}
-    .enter-btn:hover{opacity:0.85}
-
-    .container{max-width:var(--maxw);margin:36px auto;padding:20px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
-    header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-    .brand{font-weight:800;font-size:18px}
-    .nav{display:flex;gap:12px}
-    .nav a{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none}
-
-    .hero{display:grid;grid-template-columns:1fr;gap:20px;padding:22px;border-radius:10px}
-    .hero h1{font-size:32px;margin:0}
-    .hero p{color:var(--muted);margin-top:8px}
-
-    .projects{margin-top:26px}
-    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .project-card{background:var(--panel);border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.03)}
-    .project-title{font-weight:800;margin:0 0 8px}
-    .project-desc{color:var(--muted);margin:0}
-    .project-meta{display:flex;gap:8px;margin-top:12px}
-    .tag{padding:6px 10px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-size:13px}
-    .actions{margin-top:12px;display:flex;gap:8px}
-    .btn-ghost{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);cursor:pointer}
-    .btn-primary{padding:8px 12px;border-radius:8px;background:var(--text);color:var(--bg);border:none;cursor:pointer;font-weight:700}
-
-    @media (max-width:900px){.projects-grid{grid-template-columns:1fr}}
-
-    .about, .contact, .categories-section{margin-top:28px;padding:16px;border-radius:10px;background:transparent}
-    .muted{color:var(--muted)}
-
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:1000;padding:20px}
-    .modal.open{display:flex}
-    .modal-card{width:100%;max-width:700px;background:#0b0b0b;padding:18px;border-radius:10px}
-    .modal-card h3{margin:0 0 8px}
-    .modal-card p{color:var(--muted)}
-    .focus-outline{outline:2px solid rgba(255,255,255,0.06);padding:14px;border-radius:8px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>dogvloppeur — Portfolio</title>
+<style>
+:root{
+  --bg:#000;
+  --panel:#070707;
+  --card:#0b0b0b;
+  --text:#fff;
+  --muted:#c2c2c2;
+  --border:rgba(255,255,255,0.08);
+  --accent:#ffffff;
+  --glass:rgba(255,255,255,0.02);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+  --ease:cubic-bezier(.2,.9,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:60%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.splash{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:1500;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.splash.hidden{opacity:0;pointer-events:none;transform:translateY(-6%)}
+.typewrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+.typed{font-family:var(--mono);font-weight:800;font-size:44px;letter-spacing:1px;color:var(--text)}
+.angle{color:var(--muted);margin-left:6px;font-weight:700}
+.controls{display:flex;gap:2px;align-items:center}
+.cat-btn{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;transition:all .22s var(--ease)}
+.cat-btn.active{border-color:var(--border);color:var(--text);background:linear-gradient(180deg,var(--glass),transparent)}
+.enter-btn{padding:12px 22px;border-radius:12px;background:transparent;color:var(--text);cursor:pointer;font-weight:700;font-size:16px;border:1px solid rgba(255,255,255,0.03);transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+.enter-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,255,255,0.03)}
+.catbar{position:fixed;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;padding:8px;background:transparent;border-radius:999px;z-index:1200;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.catbar.show{opacity:1;pointer-events:auto}
+.catbar .cat-btn{padding:8px 14px;font-size:14px}
+.section{height:auto;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:20px 20px;margin-bottom:12px}
+.wrapper{width:100%;max-width:1200px}
+.hero-title{font-size:36px;font-weight:800;margin-bottom:12px}
+.lead{color:var(--muted);max-width:900px;text-align:center;margin-bottom:18px}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;width:100%;margin-top:18px}
+.card{background:var(--card);border-radius:12px;padding:18px;border:1px solid var(--border);transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+.card-title{font-weight:800;font-size:18px;margin-bottom:8px}
+.card-desc{color:var(--muted);margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;margin-top:12px}
+.btn-ghost{padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);cursor:pointer;transition:all .18s var(--ease)}
+.btn-ghost:hover{background:var(--accent);color:var(--bg);transform:scale(1.04)}
+.btn-primary{padding:8px 12px;border-radius:10px;background:var(--text);color:var(--bg);border:none;cursor:pointer;font-weight:700;transition:transform .18s var(--ease);box-shadow:0 6px 24px rgba(255,255,255,0.02)}
+.btn-primary:hover{transform:translateY(-3px)}
+.fade-in{opacity:0;transform:translateY(6px);animation:fadeIn .5s forwards var(--ease)}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+.section-border{width:calc(100% - 160px);max-width:1200px;border-radius:14px;padding:28px;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:1400;padding:20px}
+.modal.open{display:flex}
+.modal-card{width:100%;max-width:720px;background:#0b0b0b;padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+.modal-card h3{margin-bottom:10px}
+@media (max-width:880px){.hero-title{font-size:28px}.wrapper{padding:0 14px}.section-border{width:calc(100% - 40px)}}
+</style>
 </head>
 <body>
 
-  <div class="splash" id="splash">
-    <div class="typewrap">
-      <div style="display:flex;align-items:center;gap:8px"><div class="typed" id="typed"> </div><div class="angle">&lt;&gt;</div></div>
-      <div class="enter-row">
-        <button class="enter-btn" id="enter">[ Enter ]</button>
-      </div>
+<div class="splash" id="splash">
+  <div class="typewrap">
+    <div style="display:flex;align-items:center;gap:10px"><div class="typed" id="typed"></div><div class="angle">&lt;&gt;</div></div>
+    <div class="controls">
+      <button class="enter-btn" id="enter">[ Enter ]</button>
     </div>
   </div>
+</div>
 
-  <div class="container" id="app">
-    <header class="top">
-      <div class="brand">dogvloppeur&lt;&gt;</div>
-      <nav class="nav">
-        <a href="#projects">Projects</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<div class="catbar" id="catbar" aria-hidden="true">
+  <button class="cat-btn active" data-cat="all">All</button>
+  <button class="cat-btn" data-cat="ai">AI</button>
+  <button class="cat-btn" data-cat="apps">Apps</button>
+  <button class="cat-btn" data-cat="tools">Tools</button>
+</div>
 
-    <section class="hero">
-      <h1>I build intelligent agents, websites & applications</h1>
-      <p class="muted">Research & development of AI agents for games, simulations and cross-platform applications.</p>
-    </section>
-
-    <section class="projects" id="projects">
-      <h2>Projects</h2>
-      <div class="projects-grid" id="projects-grid"></div>
-    </section>
-
-    <section class="categories-section" id="categories">
-      <h2>Categories</h2>
-      <p class="muted">Simple presentation of categories. Detailed elements will be added gradually.</p>
-      <ul style="margin-top:12px">
-        <li><strong>AI</strong> — Agents, simulations, and learning models.</li>
-        <li><strong>Apps</strong> — Mobile & desktop applications (Flutter).</li>
-        <li><strong>Tools</strong> — Scripts & automation — <em style="color:var(--muted)">Coming soon</em></li>
-      </ul>
-    </section>
-
-    <section class="about" id="about">
-      <h2>About</h2>
-      <p class="muted">dogvloppeur — developer specialized in AI & applications. I build simulations, agents and interfaces to turn prototypes into products.</p>
-    </section>
-
-    <section class="contact" id="contact">
-      <h2>Contact</h2>
-      <p class="muted">Code & repos: <a href="https://github.com/dogvloppeur" target="_blank">github.com/dogvloppeur</a></p>
-      <p class="muted">Prefer exchanges via Discord.</p>
-    </section>
-
-  </div>
-
-  <div class="modal" id="modal">
-    <div class="modal-card">
-      <h3 id="modal-title">Title</h3>
-      <p id="modal-desc"></p>
-      <div style="margin-top:12px;display:flex;gap:8px"><button class="btn-primary" id="modal-close">Close</button></div>
+<section class="section" id="hero">
+  <div class="section-border fade-in wrapper">
+    <div class="hero-title">dogvloppeur - the website is in development&lt;&gt;</div>
+    <div class="lead">I build intelligent agents, websites and cross-platform applications. Use the category buttons to jump to a section or explore projects below.</div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:6px">
+      <button class="btn-primary" id="show-projects">Explore Projects</button>
     </div>
   </div>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const text = 'dogvloppeur';
-      const el = document.getElementById('typed');
-      let p = 0;
-      (function type(){ if (!el) return; if (p <= text.length) { el.textContent = text.slice(0,p); p++; setTimeout(type,80); } })();
+<section class="section" id="projects">
+  <div class="section-border wrapper">
+    <h2>Projects</h2>
+    <div class="projects-grid" id="projects-grid"></div>
+  </div>
+</section>
 
-      const splash = document.getElementById('splash');
-      const app = document.getElementById('app');
-      const enter = document.getElementById('enter');
+<section class="section" id="ai">
+  <div class="section-border wrapper">
+    <h2>AI</h2>
+    <p class="lead">Agents, simulations and learning models. Focus on reinforcement learning, simulation pipelines and evaluation tools.</p>
+    <div class="projects-grid" id="ai-grid"></div>
+  </div>
+</section>
 
-      function revealAndScrollToCategories() {
-        splash.classList.add('hidden');
-        setTimeout(()=>{
-          try{ splash.style.display='none'; }catch(e){}
-          app.style.opacity='1'; app.style.transform='translateY(0)';
-          const cat = document.getElementById('categories');
-          if(cat){ cat.scrollIntoView({behavior:'smooth',block:'start'}); cat.classList.add('focus-outline'); setTimeout(()=>cat.classList.remove('focus-outline'),1600); }
-        },420);
-      }
+<section class="section" id="apps">
+  <div class="section-border wrapper">
+    <h2>Apps</h2>
+    <p class="lead">Mobile and desktop applications (Flutter / Dart), clean UI and responsive design.</p>
+    <div class="projects-grid" id="apps-grid"></div>
+  </div>
+</section>
 
-      enter.addEventListener('click',(ev)=>{ev.preventDefault(); revealAndScrollToCategories();});
-      document.addEventListener('keydown',(e)=>{if(e.key==='Enter'){if(splash&&!splash.classList.contains('hidden')){revealAndScrollToCategories();}}});
+<section class="section" id="tools">
+  <div class="section-border wrapper">
+    <h2>Tools</h2>
+    <p class="lead">Scripts, automation and utility tools. Small, focused projects to solve specific problems.</p>
+    <div class="projects-grid" id="tools-grid"></div>
+  </div>
+</section>
 
-      renderProjects();
-      const modalClose=document.getElementById('modal-close');
-      if(modalClose) modalClose.addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+<section class="section" id="about">
+  <div class="section-border wrapper">
+    <h2>About</h2>
+    <p class="lead">Developer specialized in AI and applications. I build simulations, agents and interfaces to turn prototypes into products.</p>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-border wrapper">
+    <h2>Contact</h2>
+    <p class="lead">Code & repos: <a href="https://github.com/dogvloppeur" target="_blank">github.com/dogvloppeur</a></p>
+    <p class="lead">Prefer exchanges via Discord.</p>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
+      <button class="btn-ghost" id="modal-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const text='dogvloppeur';
+  const tw=document.getElementById('typed');
+  let i=0;
+  (function type(){ if(!tw) return; if(i<=text.length){ tw.textContent=text.slice(0,i); i++; setTimeout(type,70); } })();
+
+  let selected='all';
+  function setActiveButtons(root){
+    root.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===selected));
+  }
+
+  document.querySelectorAll('.splash .cat-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      selected=b.dataset.cat;
+      setActiveButtons(document);
     });
+  });
 
-    const projects=[
-      {id:'clash',title:'Clash Royale AI',desc:'Reinforcement learning agent for Clash Royale. Simulation, training, evaluation.',tags:['AI','RL'],repo:'https://github.com/dogvloppeur'},
-      {id:'cash',title:'CashCrypto',desc:'Flutter app to track crypto & stocks portfolio, charts and mock trading.',tags:['Flutter','Mobile'],repo:'https://github.com/dogvloppeur'},
-      {id:'toolkit',title:'Tools & Scripts',desc:'Collection of automation tools and utility scripts (in development).',tags:['Tools'],repo:'https://github.com/dogvloppeur'},
-      {id:'website',title:'Personal Website',desc:'Personal websites to showcase projects like StanixOS or BenOS.',tags:['Web'],repo:'https://github.com/dogvloppeur'}
-    ];
+  document.querySelectorAll('#catbar .cat-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      selected=b.dataset.cat;
+      setActiveButtons(document);
+      scrollToCategory(selected);
+    });
+  });
 
-    function renderProjects(){
-      const grid=document.getElementById('projects-grid');
-      if(!grid) return;
-      grid.innerHTML='';
-      projects.forEach(pj=>{
-        const card=document.createElement('article'); card.className='project-card';
-        card.innerHTML=`<h3 class="project-title">${pj.title}</h3><p class="project-desc">${pj.desc}</p><div class="project-meta">${pj.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div><div class="actions"><button class="btn-ghost" data-id="${pj.id}">Learn more</button><button class="btn-primary" data-repo="${pj.repo}">View repo</button></div>`;
-        grid.appendChild(card);
-      });
-      document.querySelectorAll('.project-card .btn-ghost').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.id; const pj=projects.find(x=>x.id===id); if(!pj) return; openModal(pj.title,pj.desc);}));
-      document.querySelectorAll('.project-card .btn-primary').forEach(b=>b.addEventListener('click',()=>{window.open(b.dataset.repo,'_blank');}));
-    }
+  function showMain(){
+    document.getElementById('splash').classList.add('hidden');
+    setTimeout(()=>{ document.getElementById('splash').style.display='none'; },420);
+    document.getElementById('catbar').classList.add('show');
+    setActiveButtons(document);
+    renderAllGrids();
+    scrollToCategory(selected);
+  }
 
-    function openModal(t,d){ document.getElementById('modal-title').textContent=t; document.getElementById('modal-desc').textContent=d; document.getElementById('modal').classList.add('open'); }
-  </script>
+  document.getElementById('enter').addEventListener('click', showMain);
+  document.addEventListener('keydown', e=>{ if(e.key==='Enter'){ if(!document.getElementById('splash').classList.contains('hidden')) showMain(); } });
+
+  document.getElementById('show-projects').addEventListener('click',()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
+
+  const projects=[
+    {id:'clash',title:'Clash Royale AI',desc:'Reinforcement learning agent for Clash Royale. Simulation, training, evaluation.',tags:['AI','RL'],cat:'ai',repo:'https://github.com/dogvloppeur'},
+    {id:'cash',title:'CashCrypto',desc:'Flutter app to track crypto & stocks portfolio, charts and mock trading.',tags:['Flutter','Mobile'],cat:'apps',repo:'https://github.com/dogvloppeur'},
+    {id:'toolkit',title:'Tools & Scripts',desc:'Automation tools and utility scripts (in development).',tags:['Tools'],cat:'tools',repo:'https://github.com/dogvloppeur'},
+    {id:'website',title:'Personal Website',desc:'Personal site and small web experiments.',tags:['Web'],cat:'apps',repo:'https://github.com/dogvloppeur'}
+  ];
+
+  function createCard(pj){
+    const el=document.createElement('article'); el.className='card';
+    el.innerHTML=`<div class="card-title">${pj.title}</div><div class="card-desc">${pj.desc}</div><div class="chips">${pj.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div><div class="actions"><button class="btn-ghost" data-id="${pj.id}">Learn more</button><button class="btn-primary" data-repo="${pj.repo}">View repo</button></div>`;
+    return el;
+  }
+
+  function renderGrid(containerId, list){
+    const container=document.getElementById(containerId);
+    if(!container) return;
+    container.innerHTML='';
+    list.forEach(pj=>container.appendChild(createCard(pj)));
+    container.querySelectorAll('.btn-ghost').forEach(b=>b.addEventListener('click',()=>{
+      const id=b.dataset.id; const pj=projects.find(x=>x.id===id);
+      if(!pj) return; openModal(pj.title,pj.desc);
+    }));
+    container.querySelectorAll('.btn-primary').forEach(b=>b.addEventListener('click',()=>window.open(b.dataset.repo,'_blank')));
+  }
+
+  function renderAllGrids(){
+    renderGrid('projects-grid', projects);
+    renderGrid('ai-grid', projects.filter(p=>p.cat==='ai'));
+    renderGrid('apps-grid', projects.filter(p=>p.cat==='apps'));
+    renderGrid('tools-grid', projects.filter(p=>p.cat==='tools'));
+  }
+
+  function scrollToCategory(cat){
+    if(cat==='all'){ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); return; }
+    const map={ai:'ai',apps:'apps',tools:'tools'};
+    const el=document.getElementById(map[cat]);
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  }
+
+  document.getElementById('modal-close').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+});
+
+function openModal(t,d){
+  document.getElementById('modal-title').textContent=t;
+  document.getElementById('modal-desc').textContent=d;
+  document.getElementById('modal').classList.add('open');
+}
+</script>
+
 </body>
 </html>
